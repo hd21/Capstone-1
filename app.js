@@ -1,30 +1,30 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
-function retrieveDataFromApi(searchTerm, callback) {
+    function retrieveDataFromApi(searchTerm, callback) {
 
-    var settings = {
+        var settings = {
 
-        url: 'https://www.googleapis.com/youtube/v3/search',
-        data: {
+            url: 'https://www.googleapis.com/youtube/v3/search',
+            data: {
 
-            part: 'snippet',
-            key: 'AIzaSyASovBdr9Ul8NmoI2nbudX1sv91kxupWhY',
-            q: searchTerm,
-            r: 'json',
-            maxResults: 3
+                part: 'snippet',
+                key: 'AIzaSyASovBdr9Ul8NmoI2nbudX1sv91kxupWhY',
+                q: searchTerm,
+                r: 'json',
+                maxResults: 3
 
-        },
+            },
 
-        dataType: 'json',
-        type: 'GET',
-        success: callback
-    };
+            dataType: 'json',
+            type: 'GET',
+            success: callback
+        };
 
-    $.ajax(settings);
-}
+        $.ajax(settings);
+    }
 
-function showYoutubeSearchData(data) {
-		
+    function showYoutubeSearchData(data) {
+
         var html = data.items.map(function(item) {
 
             var $template = $('<div class="left-div"><img class="img-responsive thumbnail"><div class="info-group"><h4 class="space"><a class="video-id"></a></h4><small>By<span class="channel-title"></span> </small><p><a class="channel-id"><button type="button">View Channel</button></a></p><p class="description"></p></div></div>');
@@ -49,7 +49,7 @@ function showYoutubeSearchData(data) {
         $('#meetup-column').removeClass("hidden");
         $('.js-yt-search-results').html(html);
 
-}
+    }
 
     $('#exercise-list').change(function() {
         var selected = $(this).val() + " Exercises";
@@ -58,8 +58,7 @@ function showYoutubeSearchData(data) {
 
 });
 
-// Request data from MeetUp
-function getMeetUpData(search, location){
+function getMeetUpData(search, location) {
 
     var meetUpSettings = {
         url: "https://api.meetup.com/find/groups",
@@ -71,50 +70,52 @@ function getMeetUpData(search, location){
         },
         dataType: 'jsonp',
         type: 'GET',
-        success: function(data){
-            console.log(data);
-            showMeetUpSearchData(data);
+        success: function(meetupData) {
+            console.log(meetupData);
+            showMeetUpSearchData(meetupData.data);
         }
     };
 
     $.ajax(meetUpSettings);
 }
 
-
 function showMeetUpSearchData(data) {
-    
+
+    $("#events").empty();
+
     var eventInElement = '';
 
-    if(!data){
+    if (!data) {
         eventInElement += '<p> No results </p>';
-    } 
-    
-    else {
+    } else {
 
         for (var i = 0; i < data.length; i++) {
 
-        eventInElement += "<li>";
-        eventInElement += "<p>" + data.data[i].name + "</p>";
-        eventInElement += "<p class = 'meetup-description'>" + data.data[i].description + "</p>";
-	    eventInElement += "<p class = 'meetup-state'>" + "State:" + " " + data.data[i].state + "</p>";
-	    eventInElement += "<p class = 'meetup-state'>" + "City:" + " " + data.data[i].city + "</p>";
-	    eventInElement += "<a class = 'meetup-link' href = " + "'" + data.data[i].link + "'" + ">" + "Event Page" + "</a><br>";
-        eventInElement += "</li>";
-    
-    }
+            eventInElement += "<li>";
+            eventInElement += "<p>" + data[i].name + "</p>";
+            eventInElement += "<p class = 'meetup-description'>" + data[i].description + "</p>";
+            eventInElement += "<p class = 'meetup-state'>" + "State:" + " " + data[i].state + "</p>";
+            eventInElement += "<p class = 'meetup-state'>" + "City:" + " " + data[i].city + "</p>";
+            eventInElement += "<a class = 'meetup-link' href = " + "'" + data[i].link + "'" + ">" + "Event Page" + "</a><br>";
+            eventInElement += "</li>";
 
-      $("#event-list").html(eventInElement);
- }
-// Data is filtered according to city entered in input, but results are not showing
-//    showMeetUpSearchData(data);
+        }
+
+        $("#events").append(eventInElement);
+    }
 }
 
 
-$('#btn-location-input').on("click", function(event){
+$('#location-input').submit(function(event) {
     event.preventDefault();
+
     var searchEvent = $("#exercise-list").find(":selected").text();
     var locationEvent = $(".address").val();
-    getMeetUpData(searchEvent, locationEvent, showMeetUpSearchData);
-    
-});
 
+    if (searchEvent.length && locationEvent.length || event.key === 'Enter') {
+        getMeetUpData(searchEvent, locationEvent, showMeetUpSearchData);
+    } else {
+        alert('Please input a city and exercise type!');
+    }
+
+});
