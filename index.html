@@ -1,0 +1,69 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+
+<!--Have title here-->
+
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+     <link rel="stylesheet" href="main.css">
+	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>What type of exercise would you like to do today?</h1>
+
+        <select name="dropdown-list" id="exercise-list">
+
+               <option>Exercises</option>
+
+            <optgroup label="Cardio/Endurance Exercises">
+                <option>HIIT</option>
+                <option>Circuit Training</option>
+                <option>Running</option>
+                <option>Brisk Walking</option>
+                <option>Cycling</option>
+                <option>Swimming</option>
+            </optgroup>
+
+            <optgroup label="Strength Training">
+                <option>Body Weight</option>
+                <option>Free Weight</option>
+                <option>Weight Lifting Machines</option>
+            </optgroup>
+
+            <optgroup label="Flexibility/Balance Exercises">
+                <option>Yoga</option>
+                <option>Pilates</option>
+                <option>Tai Chi</option>
+            </optgroup>
+        </select>
+        
+        <div id="btn-position">
+             <button type="submit" class="js-search-btn submit-btn">Submit</button>
+        </div>      
+    </header>
+
+    <div class="modal-body row">
+        <div class="col-md-6 scroll">
+        <ol class="js-yt-search-results"></ol>
+        </div>
+    
+    <div class="hidden col-md-6" id="meetup-column">
+        <h3>Want to work out with your community?</h3>
+        <h4>Find a Meetup near you:</h4>
+
+        <form id="location-input">
+            <input type="search" class="address" placeholder="Enter city or state" required>
+            <button type="submit" id="btn-location-input">Submit</button>
+        </form>
+
+        <ul id="event-list"></ul>
+    
+</body>
+
+    <script src="app.js"></script>
+
+</html>
