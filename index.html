@@ -12,10 +12,10 @@
 <body>
 
     <header>
+        <div class="question">
+            <h1>What type of exercise would you like to do today?</h1>
 
-        <h1>What type of exercise would you like to do today?</h1>
-
-        <select name="dropdown-list" id="exercise-list">
+            <select name="dropdown-list" id="exercise-list">
            <option>Exercises</option>
             <optgroup label="Cardio/Endurance Exercises">
                 <option>HIIT</option>
@@ -38,15 +38,11 @@
                 <option>Tai Chi</option>
             </optgroup>
         </select>
-
-        <div id="btn-position">
-            <button type="submit" class="js-search-btn submit-btn">Submit</button>
         </div>
-
     </header>
 
     <div class="modal-body row">
-        <div class="col-md-6 scroll">
+        <div class="col-md-6">
             <ol class="js-yt-search-results"></ol>
         </div>
 
@@ -56,14 +52,14 @@
 
             <form id="location-input">
                 <input type="search" class="address" placeholder="Enter city or state">
-                <button type="submit">Submit</button>
+                <button type="submit" class="submit-btn">Submit</button>
             </form>
 
             <ul id="events"></ul>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 </body>
 
 </html>
