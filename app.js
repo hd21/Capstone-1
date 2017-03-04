@@ -12,7 +12,9 @@ $(document)
                     key: 'AIzaSyASovBdr9Ul8NmoI2nbudX1sv91kxupWhY',
                     q: searchTerm,
                     r: 'json',
-                    maxResults: 3
+                    maxResults: 8,
+                    safeSearch: 'strict',
+                    relevanceLanguage: 'en'
 
                 },
 
@@ -30,40 +32,30 @@ $(document)
                 .items
                 .map(function(item) {
 
-                    var $template = $('<div class="left-div"><img class="img-responsive thumbnail"><div class="info-gro' +
-                        'up"><h4 class="space"><a class="video-id"></a></h4><small>By<span class="channel' +
-                        '-title"></span> </small><p><a class="channel-id"><button type="button">View Chan' +
-                        'nel</button></a></p><p class="description"></p></div></div>');
+                    var $template = $('<div class="col-xs-6 col-sm-4 col-md-3"><div class="vid-thumbnail"><a class="vid' +
+                        'eo-id-img" data-lity><img class="img-responsive thumbnail"><div class="play-vid"' +
+                        '><i class="fa fa-youtube-play modify-font" aria-hidden="true"></i></div></a></di' +
+                        'v><br><div><h5><a class="video-id" data-lity></a></h5></div></div>');
 
                     var vidID = item.id.videoId;
                     var title = item.snippet.title;
-                    var description = item.snippet.description;
                     var thumbnail = item.snippet.thumbnails.high.url;
-                    var channelTitle = item.snippet.channelTitle;
-                    var channelID = item.snippet.channelId;
 
                     $template
                         .find('.video-id')
                         .attr('href', 'http://youtube.com/embed/' + vidID + '?rel=0')
                         .text(title);
                     $template
+                        .find('.video-id-img')
+                        .attr('href', 'http://youtube.com/embed/' + vidID + '?rel=0')
+                    $template
                         .find('.thumbnail')
                         .attr('src', thumbnail);
-                    $template
-                        .find('.channel-id')
-                        .attr('href', 'https://www.youtube.com/channel/' + channelID);
-                    $template
-                        .find('.description')
-                        .text(description);
-                    $template
-                        .find('.channel-title')
-                        .text(channelTitle);
 
                     return $template;
 
                 });
 
-            $('#meetup-column').removeClass("hidden");
             $('.js-yt-search-results').html(html);
 
         }
@@ -73,6 +65,12 @@ $(document)
                 var selected = $(this).val() + " Exercises";
                 retrieveDataFromApi(selected, showYoutubeSearchData);
             });
+
+        $('#meetup-btn').click(function(event) {
+            $('.js-yt-search-results').hide();
+            $('#meetup-column').removeClass("hidden");
+
+        });
 
     });
 
@@ -91,6 +89,7 @@ function getMeetUpData(search, location) {
         success: function(meetupData) {
             console.log(meetupData);
             showMeetUpSearchData(meetupData.data);
+
         }
     };
 
@@ -102,19 +101,25 @@ function showMeetUpSearchData(data) {
     $("#events").empty();
 
     var eventInElement = '';
+    console.log(data);
 
-    if (!data) {
-        eventInElement += '<p> No results </p>';
+    if (!data.length) {
+        eventInElement += '<p>No results</p>';
+        alert("Oops! It looks like there are no MeetUp events on this type of exercise near you" +
+            ".");
+
     } else {
 
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 6; i++) {
 
-            eventInElement += '<div class="right-div"><p>Event:<br>' + data[i].name + '</p><p>Location:<br>' + data[i].city + ', ' + data[i].state + '</p><p>Description:<br>' + data[i].description + '</p><a href ="' + data[i].link + '">Event Page</a><br></div>';
+            eventInElement += '<div class="section-style"><p><br><b>' + data[i].name + '</b></p><p><b>Location:</b><br><i>' + data[i].city + ', ' + data[i].state + '</p></i><p><a href ="' + data[i].link + '">Event Page</a></p><p><b>Description:</b>' + data[i].description + '</p></div>';
 
         }
 
-        $("#events").append(eventInElement);
     }
+
+    $("#events").append(eventInElement);
+
 }
 
 $('#location-input')
@@ -133,3 +138,8 @@ $('#location-input')
         }
 
     });
+
+$('#yt-btn').on('click', function() {
+    $('#meetup-column').addClass('hidden');
+    $('.js-yt-search-results').show();
+});
