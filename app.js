@@ -38,8 +38,6 @@ $(document)
 
                     var $template = $('<article class="video"><figure><a class="video-id-img" data-lity><img class="img-responsive thumbnail"></a></figure></article>');
 
-                    // <div class="play-vid"><i class="fa fa-youtube-play modify-font" aria-hidden="true"></i></div>
-
                     $template
                         .find('.video-id')
                         .attr('href', 'http://youtube.com/embed/' + vidID + '?rel=0')
