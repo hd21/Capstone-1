@@ -12,7 +12,7 @@ $(document)
                     key: 'AIzaSyASovBdr9Ul8NmoI2nbudX1sv91kxupWhY',
                     q: searchTerm,
                     r: 'json',
-                    maxResults: 8,
+                    maxResults: 15,
                     safeSearch: 'strict',
                     relevanceLanguage: 'en'
 
@@ -32,14 +32,13 @@ $(document)
                 .items
                 .map(function(item) {
 
-                    var $template = $('<div class="col-xs-6 col-sm-4 col-md-3"><div class="vid-thumbnail"><a class="vid' +
-                        'eo-id-img" data-lity><img class="img-responsive thumbnail"><div class="play-vid"' +
-                        '><i class="fa fa-youtube-play modify-font" aria-hidden="true"></i></div></a></di' +
-                        'v><br><div><h5><a class="video-id" data-lity></a></h5></div></div>');
-
                     var vidID = item.id.videoId;
                     var title = item.snippet.title;
                     var thumbnail = item.snippet.thumbnails.high.url;
+
+                    var $template = $('<article class="video"><figure><a class="video-id-img" data-lity><img class="img-responsive thumbnail"></a></figure></article>');
+
+                    // <div class="play-vid"><i class="fa fa-youtube-play modify-font" aria-hidden="true"></i></div>
 
                     $template
                         .find('.video-id')
@@ -104,9 +103,7 @@ function showMeetUpSearchData(data) {
     console.log(data);
 
     if (!data.length) {
-        eventInElement += '<p>No results</p>';
-        alert("Oops! It looks like there are no MeetUp events on this type of exercise near you" +
-            ".");
+        eventInElement += '<p style="text-align:center">Oops! It looks like there are no Meetup events about this type of exercise near you.</p>';
 
     } else {
 

@@ -2,10 +2,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Fitness Finder</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-    <script src="https://use.fontawesome.com/b44b2dd68d.js"></script>
     <link rel="stylesheet" type="text/css" href="lity.min.css">
     <link rel="stylesheet" type="text/css" href="main.css">
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
@@ -20,11 +20,11 @@
 
             <div class="inner">
                 <header>
-                    <h1>What type of exercise would you like to do today?</h1><br>
+                    <h1>What type of <span>exercise</span> would you like to do today?</h1><br>
 
                     <select name="dropdown-list" id="exercise-list">
             
-            <option>Exercises</option>
+            <option id="uppercase">Exercises</option>
 
             <optgroup label="Cardio/Endurance Exercises">
                 <option>HIIT</option>
@@ -61,10 +61,10 @@
 
     </section>
 
+
     <!--YouTube Section-->
     <div class="container-fluid" id="YouTubestyle">
-        <ul class="js-yt-search-results row"></ul>
-
+        <ul class="js-yt-search-results"></ul>
     </div>
 
     <!--Meetup Section-->
