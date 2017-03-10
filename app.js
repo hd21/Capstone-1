@@ -63,9 +63,18 @@ $(document)
                 retrieveDataFromApi(selected, showYoutubeSearchData);
             });
 
+        $('#yt-btn').click(function() {
+            $('html, body').animate({
+                scrollTop: $(".js-yt-search-results").offset().top
+            }, 'slow');
+        });
+
         $('#meetup-btn').click(function(event) {
             $('.js-yt-search-results').hide();
             $('#meetup-column').removeClass("hidden");
+            $('html, body').animate({
+                scrollTop: $("#meetup-column").offset().top
+            }, 'slow');
 
         });
 
