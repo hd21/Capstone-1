@@ -140,6 +140,9 @@ $('#location-input')
         } else {
             alert('Please select an exercise type and enter your current location.');
         }
+        $('html, body').animate({
+            scrollTop: $("#meetup-column").offset().top
+        }, 'slow');
 
     });
 
