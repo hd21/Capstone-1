@@ -4,24 +4,22 @@
  }
  
  #banner {
-     background-image: url('banner-img.jpeg');
+     background: url('banner-img.jpeg') no-repeat center center fixed;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
      background-size: cover;
-     background-repeat: no-repeat;
-     background-position: center;
-     position: relative;
      height: 100vh;
+     position: relative;
  }
  
  #banner .content {
-     width: 70%;
+     width: 50%;
      background-color: rgba(21, 27, 33, 0.6);
      color: #ffffff;
-     padding: 1.5em .5em 2.5em .5em;
-     position: absolute;
-     top: 50%;
-     left: 50%;
-     margin-right: -50%;
-     transform: translate(-50%, -50%)
+     padding: 4em 0;
+     display: block;
+     margin: 100px auto 0 auto;
  }
  
  #banner .content .inner {
@@ -37,7 +35,7 @@
  }
  
  h1 span {
-     color: #3fc4c8;
+     color: #6cc091;
      font-size: 2rem;
      letter-spacing: 5px;
  }
@@ -110,18 +108,6 @@
  .video figure {
      height: 0;
      padding-bottom: 60%;
-     @media (max-width: 1824px) {
-         .video {
-             width: 23%;
-             /* Thumbnails 4 across */
-         }
-     }
-     @media (max-width: 1024px) {
-         .video {
-             width: 31.333%;
-             /* Thumbnails 3 across */
-         }
-     }
  }
  
  @media only screen and (max-width:480px) {
@@ -133,15 +119,17 @@
          padding-bottom: 10px;
      }
      #banner {
-         display: block;
-         text-align: center;
-         width: 414px;
-         padding-top: 10px;
-         padding-bottom: 10px;
+         padding-top: 35px;
+     }
+     #banner .content {
+         margin-top: 0;
+         padding: 2em 1em;
+         width: 80%;
      }
      .options {
          width: 100%;
          display: block;
+         padding: 0;
      }
      select {
          display: inline-block;
@@ -153,6 +141,14 @@
          display: inline-block;
          margin-left: auto;
          margin-right: auto;
+     }
+ }
+ 
+ @media only screen and (max-width:320px) {
+     #banner .content {
+         margin-top: 0;
+         width: 80%;
+         font-size: 50%;
      }
  }
  
@@ -168,8 +164,6 @@
  .options {
      background-color: transparent;
      margin-top: 25px;
-     margin-right: 5px;
-     margin-left: 5px;
      box-shadow: inset 0 0 0 3px #6cc091;
      color: #6cc091;
      border-radius: 30px;
@@ -177,15 +171,11 @@
      cursor: pointer;
      display: inline-block;
      font-size: .75em;
-     font-weight: 400;
      height: 3.75em;
-     line-height: 3.85em;
-     letter-spacing: 2px;
-     padding: 0 4em;
-     text-align: center;
      text-decoration: none;
      text-transform: uppercase;
      white-space: nowrap;
+     padding: 0 40px;
  }
  
  .options:hover {
